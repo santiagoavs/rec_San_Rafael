@@ -25,7 +25,7 @@ citasController.obtenerTodas = async (req, res) => {
       total: citas.length
     });
   } catch (error) {
-    console.error('❌ Error obteniendo citas:', error);
+    console.error('Error obteniendo citas:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener citas',
@@ -57,7 +57,7 @@ citasController.obtenerPorId = async (req, res) => {
       data: cita
     });
   } catch (error) {
-    console.error('❌ Error obteniendo cita:', error);
+    console.error('Error obteniendo cita:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener cita',
@@ -101,7 +101,7 @@ citasController.crear = async (req, res) => {
       data: citaPopulada
     });
   } catch (error) {
-    console.error('❌ Error creando cita:', error);
+    console.error('Error creando cita:', error);
     res.status(500).json({
       success: false,
       message: 'Error al crear cita',
@@ -152,7 +152,7 @@ citasController.actualizar = async (req, res) => {
       data: citaActualizada
     });
   } catch (error) {
-    console.error('❌ Error actualizando cita:', error);
+    console.error('Error actualizando cita:', error);
     res.status(500).json({
       success: false,
       message: 'Error al actualizar cita',
@@ -182,7 +182,7 @@ citasController.eliminar = async (req, res) => {
       message: 'Cita eliminada exitosamente'
     });
   } catch (error) {
-    console.error('❌ Error eliminando cita:', error);
+    console.error('Error eliminando cita:', error);
     res.status(500).json({
       success: false,
       message: 'Error al eliminar cita',

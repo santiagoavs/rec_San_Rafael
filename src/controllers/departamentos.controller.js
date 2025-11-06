@@ -15,7 +15,7 @@ departamentosController.obtenerTodos = async (req, res) => {
       total: departamentos.length
     });
   } catch (error) {
-    console.error('❌ Error obteniendo departamentos:', error);
+    console.error('Error obteniendo departamentos:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener departamentos',
@@ -45,7 +45,7 @@ departamentosController.obtenerPorId = async (req, res) => {
       data: departamento
     });
   } catch (error) {
-    console.error('❌ Error obteniendo departamento:', error);
+    console.error('Error obteniendo departamento:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener departamento',
@@ -86,7 +86,7 @@ departamentosController.crear = async (req, res) => {
       data: nuevoDepartamento
     });
   } catch (error) {
-    console.error('❌ Error creando departamento:', error);
+    console.error('Error creando departamento:', error);
     res.status(500).json({
       success: false,
       message: 'Error al crear departamento',
@@ -138,7 +138,7 @@ departamentosController.actualizar = async (req, res) => {
       data: departamento
     });
   } catch (error) {
-    console.error('❌ Error actualizando departamento:', error);
+    console.error('Error actualizando departamento:', error);
     res.status(500).json({
       success: false,
       message: 'Error al actualizar departamento',
@@ -168,7 +168,7 @@ departamentosController.eliminar = async (req, res) => {
       message: 'Departamento eliminado exitosamente'
     });
   } catch (error) {
-    console.error('❌ Error eliminando departamento:', error);
+    console.error('Error eliminando departamento:', error);
     res.status(500).json({
       success: false,
       message: 'Error al eliminar departamento',

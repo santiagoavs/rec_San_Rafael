@@ -14,7 +14,7 @@ authController.registrarPacientes = async (req, res) => {
   try {
     const { nombre, correo, contrasena, fechaNacimiento, telefono, direccion } = req.body;
 
-    console.log('📝 Registrando nuevo paciente:', correo);
+    console.log('Registrando nuevo paciente:', correo);
 
     // Verificar si el correo ya existe
     const existingPaciente = await Paciente.findOne({ correo: correo.toLowerCase() });
@@ -46,7 +46,7 @@ authController.registrarPacientes = async (req, res) => {
 
     await nuevoPaciente.save();
 
-    console.log('✅ Paciente registrado exitosamente:', nuevoPaciente._id);
+    console.log('Paciente registrado exitosamente:', nuevoPaciente._id);
 
     // Generar token
     const token = jwt.sign(
@@ -83,7 +83,7 @@ authController.registrarPacientes = async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('❌ Error registrando paciente:', error);
+    console.error('Error registrando paciente:', error);
     res.status(500).json({
       success: false,
       message: 'Error al registrar paciente',
@@ -99,7 +99,7 @@ authController.iniciarSesion = async (req, res) => {
   try {
     const { correo, contrasena } = req.body;
 
-    console.log('🔐 Intento de inicio de sesión:', correo);
+    console.log('Intento de inicio de sesión:', correo);
 
     if (!correo || !contrasena) {
       return res.status(400).json({
@@ -121,20 +121,20 @@ authController.iniciarSesion = async (req, res) => {
     }
 
     if (!user) {
-      console.log('❌ Usuario no encontrado o inactivo');
+      console.log('Usuario no encontrado o inactivo');
       return res.status(401).json({
         success: false,
         message: 'Credenciales incorrectas'
       });
     }
 
-    console.log('✅ Usuario encontrado:', { id: user._id, role: user.role });
+    console.log('Usuario encontrado:', { id: user._id, role: user.role });
 
     // Verificar contraseña
     const passwordMatch = await user.comparePassword(contrasena);
 
     if (!passwordMatch) {
-      console.log('❌ Contraseña incorrecta');
+      console.log('Contraseña incorrecta');
       return res.status(401).json({
         success: false,
         message: 'Credenciales incorrectas'
@@ -165,7 +165,7 @@ authController.iniciarSesion = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 días
     });
 
-    console.log('✅ Inicio de sesión exitoso');
+    console.log('Inicio de sesión exitoso');
 
     res.status(200).json({
       success: true,
@@ -184,7 +184,7 @@ authController.iniciarSesion = async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('❌ Error en inicio de sesión:', error);
+    console.error('Error en inicio de sesión:', error);
     res.status(500).json({
       success: false,
       message: 'Error al iniciar sesión',
@@ -204,14 +204,14 @@ authController.cerrarSesion = async (req, res) => {
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     });
 
-    console.log('✅ Sesión cerrada exitosamente');
+    console.log('Sesión cerrada exitosamente');
 
     res.status(200).json({
       success: true,
       message: 'Sesión cerrada exitosamente'
     });
   } catch (error) {
-    console.error('❌ Error cerrando sesión:', error);
+    console.error('Error cerrando sesión:', error);
     res.status(500).json({
       success: false,
       message: 'Error al cerrar sesión',
@@ -227,7 +227,7 @@ authController.solicitarCodigo = async (req, res) => {
   try {
     const { correo } = req.body;
 
-    console.log('📧 Solicitud de recuperación de contraseña para:', correo);
+    console.log('Solicitud de recuperación de contraseña para:', correo);
 
     if (!correo) {
       return res.status(400).json({
@@ -246,7 +246,7 @@ authController.solicitarCodigo = async (req, res) => {
 
     // Por seguridad, siempre responder con éxito aunque el usuario no exista
     if (!user) {
-      console.log('⚠️ Usuario no encontrado, pero respondiendo con éxito por seguridad');
+      console.log('Usuario no encontrado, pero respondiendo con éxito por seguridad');
       return res.status(200).json({
         success: true,
         message: 'Si el correo existe, recibirás un código de recuperación'
@@ -268,9 +268,9 @@ authController.solicitarCodigo = async (req, res) => {
     // Enviar email con el código
     try {
       await sendPasswordRecoveryEmail(user.correo, recoveryCode, user.nombre);
-      console.log('✅ Código de recuperación enviado');
+      console.log('Código de recuperación enviado');
     } catch (emailError) {
-      console.error('❌ Error enviando email:', emailError);
+      console.error('Error enviando email:', emailError);
       // No revelar el error al usuario
     }
 
@@ -279,7 +279,7 @@ authController.solicitarCodigo = async (req, res) => {
       message: 'Si el correo existe, recibirás un código de recuperación'
     });
   } catch (error) {
-    console.error('❌ Error solicitando código:', error);
+    console.error('Error solicitando código:', error);
     res.status(500).json({
       success: false,
       message: 'Error al solicitar código de recuperación',
@@ -295,7 +295,7 @@ authController.verificarCodigo = async (req, res) => {
   try {
     const { correo, codigo } = req.body;
 
-    console.log('🔍 Verificando código de recuperación');
+    console.log('Verificando código de recuperación');
 
     if (!correo || !codigo) {
       return res.status(400).json({
@@ -350,14 +350,14 @@ authController.verificarCodigo = async (req, res) => {
       });
     }
 
-    console.log('✅ Código verificado correctamente');
+    console.log('Código verificado correctamente');
 
     res.status(200).json({
       success: true,
       message: 'Código verificado correctamente'
     });
   } catch (error) {
-    console.error('❌ Error verificando código:', error);
+    console.error('Error verificando código:', error);
     res.status(500).json({
       success: false,
       message: 'Error al verificar código',
@@ -373,7 +373,7 @@ authController.nuevaContrasena = async (req, res) => {
   try {
     const { correo, codigo, nuevaContrasena } = req.body;
 
-    console.log('🔒 Estableciendo nueva contraseña');
+    console.log('Estableciendo nueva contraseña');
 
     if (!correo || !codigo || !nuevaContrasena) {
       return res.status(400).json({
@@ -419,14 +419,14 @@ authController.nuevaContrasena = async (req, res) => {
     user.recoveryData = null;
     await user.save();
 
-    console.log('✅ Contraseña actualizada exitosamente');
+    console.log('Contraseña actualizada exitosamente');
 
     res.status(200).json({
       success: true,
       message: 'Contraseña actualizada exitosamente'
     });
   } catch (error) {
-    console.error('❌ Error actualizando contraseña:', error);
+    console.error('Error actualizando contraseña:', error);
     res.status(500).json({
       success: false,
       message: 'Error al actualizar contraseña',

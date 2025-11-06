@@ -98,7 +98,7 @@ export const sendPasswordRecoveryEmail = async (email, code, nombre) => {
               </div>
               
               <div class="warning">
-                <strong>⚠️ Importante:</strong>
+                <strong>Importante:</strong>
                 <ul>
                   <li>Este código expira en <strong>15 minutos</strong></li>
                   <li>Solo tienes <strong>3 intentos</strong> para ingresar el código correcto</li>
@@ -122,10 +122,10 @@ export const sendPasswordRecoveryEmail = async (email, code, nombre) => {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('✅ Email enviado:', info.messageId);
+    console.log('Email enviado:', info.messageId);
     return info;
   } catch (error) {
-    console.error('❌ Error enviando email:', error);
+    console.error('Error enviando email:', error);
     throw error;
   }
 };

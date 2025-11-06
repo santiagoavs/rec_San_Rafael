@@ -17,14 +17,14 @@ const PORT = config.PORT || 4000;
 const server = app.listen(PORT, () => {
   console.log('');
   console.log('═══════════════════════════════════════════════════════');
-  console.log('🏥  SAN RAFAEL - SISTEMA MÉDICO API');
+  console.log('SAN RAFAEL - SISTEMA MÉDICO API');
   console.log('═══════════════════════════════════════════════════════');
-  console.log(`🚀  Servidor corriendo en puerto: ${PORT}`);
-  console.log(`🌍  Entorno: ${config.NODE_ENV}`);
-  console.log(`📡  URL: http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en puerto: ${PORT}`);
+  console.log(`Entorno: ${config.NODE_ENV}`);
+  console.log(`URL: http://localhost:${PORT}`);
   console.log('═══════════════════════════════════════════════════════');
   console.log('');
-  console.log('📋  Endpoints disponibles:');
+  console.log('Endpoints disponibles:');
   console.log('   • POST   /api/registrarPacientes');
   console.log('   • POST   /api/iniciarSesion');
   console.log('   • POST   /api/cerrarSesion');
@@ -44,41 +44,41 @@ const server = app.listen(PORT, () => {
 // Manejo de errores del servidor
 server.on('error', (error) => {
   if (error.code === 'EADDRINUSE') {
-    console.error(`❌ Error: El puerto ${PORT} ya está en uso`);
+    console.error(`Error: El puerto ${PORT} ya está en uso`);
     process.exit(1);
   } else {
-    console.error('❌ Error del servidor:', error);
+    console.error('Error del servidor:', error);
     process.exit(1);
   }
 });
 
 // Manejo de señales de terminación
 process.on('SIGTERM', () => {
-  console.log('🛑 SIGTERM recibido. Cerrando servidor...');
+  console.log('SIGTERM recibido. Cerrando servidor...');
   server.close(() => {
-    console.log('✅ Servidor cerrado correctamente');
+    console.log('Servidor cerrado correctamente');
     process.exit(0);
   });
 });
 
 process.on('SIGINT', () => {
-  console.log('🛑 SIGINT recibido. Cerrando servidor...');
+  console.log('SIGINT recibido. Cerrando servidor...');
   server.close(() => {
-    console.log('✅ Servidor cerrado correctamente');
+    console.log('Servidor cerrado correctamente');
     process.exit(0);
   });
 });
 
 // Manejo de errores no capturados
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('❌ Unhandled Rejection:', reason);
+  console.error('Unhandled Rejection:', reason);
   server.close(() => {
     process.exit(1);
   });
 });
 
 process.on('uncaughtException', (error) => {
-  console.error('❌ Uncaught Exception:', error);
+  console.error('Uncaught Exception:', error);
   server.close(() => {
     process.exit(1);
   });

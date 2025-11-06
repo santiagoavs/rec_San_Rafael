@@ -18,7 +18,7 @@ doctoresController.obtenerTodos = async (req, res) => {
       total: doctores.length
     });
   } catch (error) {
-    console.error('❌ Error obteniendo doctores:', error);
+    console.error('Error obteniendo doctores:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener doctores',
@@ -48,7 +48,7 @@ doctoresController.obtenerPorId = async (req, res) => {
       data: doctor
     });
   } catch (error) {
-    console.error('❌ Error obteniendo doctor:', error);
+    console.error('Error obteniendo doctor:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener doctor',
@@ -96,7 +96,7 @@ doctoresController.crear = async (req, res) => {
       data: nuevoDoctor
     });
   } catch (error) {
-    console.error('❌ Error creando doctor:', error);
+    console.error('Error creando doctor:', error);
     res.status(500).json({
       success: false,
       message: 'Error al crear doctor',
@@ -149,7 +149,7 @@ doctoresController.actualizar = async (req, res) => {
       data: doctor
     });
   } catch (error) {
-    console.error('❌ Error actualizando doctor:', error);
+    console.error('Error actualizando doctor:', error);
     res.status(500).json({
       success: false,
       message: 'Error al actualizar doctor',
@@ -182,7 +182,7 @@ doctoresController.eliminar = async (req, res) => {
       message: 'Doctor eliminado exitosamente'
     });
   } catch (error) {
-    console.error('❌ Error eliminando doctor:', error);
+    console.error('Error eliminando doctor:', error);
     res.status(500).json({
       success: false,
       message: 'Error al eliminar doctor',

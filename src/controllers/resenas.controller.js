@@ -24,7 +24,7 @@ resenasController.obtenerTodas = async (req, res) => {
       total: resenas.length
     });
   } catch (error) {
-    console.error('❌ Error obteniendo reseñas:', error);
+    console.error('Error obteniendo reseñas:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener reseñas',
@@ -56,7 +56,7 @@ resenasController.obtenerPorId = async (req, res) => {
       data: resena
     });
   } catch (error) {
-    console.error('❌ Error obteniendo reseña:', error);
+    console.error('Error obteniendo reseña:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener reseña',
@@ -100,7 +100,7 @@ resenasController.crear = async (req, res) => {
       data: resenaPopulada
     });
   } catch (error) {
-    console.error('❌ Error creando reseña:', error);
+    console.error('Error creando reseña:', error);
     
     // Manejar error de duplicado
     if (error.code === 11000) {
@@ -151,7 +151,7 @@ resenasController.actualizar = async (req, res) => {
       data: resenaActualizada
     });
   } catch (error) {
-    console.error('❌ Error actualizando reseña:', error);
+    console.error('Error actualizando reseña:', error);
     res.status(500).json({
       success: false,
       message: 'Error al actualizar reseña',
@@ -181,7 +181,7 @@ resenasController.eliminar = async (req, res) => {
       message: 'Reseña eliminada exitosamente'
     });
   } catch (error) {
-    console.error('❌ Error eliminando reseña:', error);
+    console.error('Error eliminando reseña:', error);
     res.status(500).json({
       success: false,
       message: 'Error al eliminar reseña',

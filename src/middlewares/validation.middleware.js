@@ -13,7 +13,7 @@ export const validateRequest = (req, res, next) => {
       valor: error.value
     }));
 
-    console.log('❌ Errores de validación:', formattedErrors);
+    console.log('Errores de validación:', formattedErrors);
 
     return res.status(400).json({
       success: false,

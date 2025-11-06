@@ -18,7 +18,7 @@ pacientesController.obtenerTodos = async (req, res) => {
       total: pacientes.length
     });
   } catch (error) {
-    console.error('❌ Error obteniendo pacientes:', error);
+    console.error('Error obteniendo pacientes:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener pacientes',
@@ -48,7 +48,7 @@ pacientesController.obtenerPorId = async (req, res) => {
       data: paciente
     });
   } catch (error) {
-    console.error('❌ Error obteniendo paciente:', error);
+    console.error('Error obteniendo paciente:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener paciente',
@@ -100,7 +100,7 @@ pacientesController.actualizar = async (req, res) => {
       data: paciente
     });
   } catch (error) {
-    console.error('❌ Error actualizando paciente:', error);
+    console.error('Error actualizando paciente:', error);
     res.status(500).json({
       success: false,
       message: 'Error al actualizar paciente',
@@ -133,7 +133,7 @@ pacientesController.eliminar = async (req, res) => {
       message: 'Paciente eliminado exitosamente'
     });
   } catch (error) {
-    console.error('❌ Error eliminando paciente:', error);
+    console.error('Error eliminando paciente:', error);
     res.status(500).json({
       success: false,
       message: 'Error al eliminar paciente',

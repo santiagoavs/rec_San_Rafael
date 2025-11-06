@@ -7,7 +7,7 @@ import Doctor from '../models/Doctor.js';
  * Middleware principal para verificar autenticación JWT
  */
 export const authRequired = async (req, res, next) => {
-  console.log('🔐 Verificando autenticación:', {
+  console.log('Verificando autenticación:', {
     url: req.url,
     method: req.method,
     hasCookie: !!req.cookies.authToken,
@@ -27,7 +27,7 @@ export const authRequired = async (req, res, next) => {
   }
 
   if (!token) {
-    console.log('❌ Token no proporcionado');
+    console.log('Token no proporcionado');
     return res.status(401).json({
       success: false,
       message: 'Token no proporcionado',
@@ -39,7 +39,7 @@ export const authRequired = async (req, res, next) => {
     // Verificar y decodificar el token
     const decoded = jwt.verify(token, config.JWT.secret);
 
-    console.log('🔓 Token decodificado:', {
+    console.log('Token decodificado:', {
       id: decoded.id,
       email: decoded.email,
       role: decoded.role,
@@ -47,7 +47,7 @@ export const authRequired = async (req, res, next) => {
     });
 
     if (!decoded.id) {
-      console.log('❌ Token inválido - sin ID');
+      console.log('Token inválido - sin ID');
       return res.status(401).json({
         success: false,
         message: 'Token inválido - sin ID de usuario',
@@ -74,7 +74,7 @@ export const authRequired = async (req, res, next) => {
     }
 
     if (!user) {
-      console.log('❌ Usuario no encontrado en BD:', decoded.id);
+      console.log('Usuario no encontrado en BD:', decoded.id);
       return res.status(401).json({
         success: false,
         message: 'Usuario no encontrado',
@@ -83,7 +83,7 @@ export const authRequired = async (req, res, next) => {
     }
 
     if (user.active === false) {
-      console.log('❌ Usuario inactivo:', decoded.id);
+      console.log('Usuario inactivo:', decoded.id);
       return res.status(401).json({
         success: false,
         message: 'Cuenta desactivada',
@@ -99,9 +99,9 @@ export const authRequired = async (req, res, next) => {
         user.lastLogin = new Date();
         await user.save({ validateBeforeSave: false });
       }
-      console.log('📅 LastLogin actualizado para usuario:', user._id);
+      console.log('LastLogin actualizado para usuario:', user._id);
     } catch (lastLoginError) {
-      console.warn('⚠️ Error actualizando lastLogin:', lastLoginError.message);
+      console.warn('Error actualizando lastLogin:', lastLoginError.message);
     }
 
     // Configurar req.user con la información del usuario
@@ -115,7 +115,7 @@ export const authRequired = async (req, res, next) => {
       active: user.active !== false
     };
 
-    console.log('✅ Usuario autenticado exitosamente:', {
+    console.log('Usuario autenticado exitosamente:', {
       id: req.user.id,
       type: req.user.type,
       role: req.user.role,
@@ -125,7 +125,7 @@ export const authRequired = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log('❌ Error verificando token:', {
+    console.log('Error verificando token:', {
       message: error.message,
       name: error.name,
       tokenSource
@@ -133,7 +133,7 @@ export const authRequired = async (req, res, next) => {
 
     // Limpiar cookie corrupta si el error viene de cookie
     if (tokenSource === 'Cookie' && (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError')) {
-      console.log('🗑️ Limpiando cookie corrupta');
+      console.log('Limpiando cookie corrupta');
       res.clearCookie('authToken', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
@@ -170,7 +170,7 @@ export const authRequired = async (req, res, next) => {
  */
 export const roleRequired = (allowedRoles = []) => {
   return (req, res, next) => {
-    console.log('🔑 Verificando roles:', {
+    console.log('Verificando roles:', {
       required: allowedRoles,
       userRole: req.user?.role
     });
@@ -188,7 +188,7 @@ export const roleRequired = (allowedRoles = []) => {
     const userRole = req.user.role?.toLowerCase();
 
     if (!normalizedAllowedRoles.includes(userRole)) {
-      console.log('❌ Rol insuficiente');
+      console.log('Rol insuficiente');
       return res.status(403).json({
         success: false,
         message: 'Acceso denegado. Rol insuficiente.',
@@ -200,7 +200,7 @@ export const roleRequired = (allowedRoles = []) => {
       });
     }
 
-    console.log('✅ Rol autorizado');
+    console.log('Rol autorizado');
     next();
   };
 };
@@ -224,7 +224,7 @@ export const ownershipOrAdminRequired = (resourceIdParam = 'id') => {
     const userId = req.user.id;
     const isAdmin = req.user.role?.toLowerCase() === 'admin';
 
-    console.log('🔍 Verificando propiedad:', {
+    console.log('Verificando propiedad:', {
       resourceId,
       userId,
       isAdmin

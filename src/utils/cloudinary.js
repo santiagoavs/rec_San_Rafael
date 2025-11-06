@@ -3,7 +3,13 @@ import { config } from '../config.js';
 import multer from 'multer';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
-// Configurar Cloudinary
+// Verificar credenciales de Cloudinary
+console.log('Verificando credenciales de Cloudinary:', {
+  cloud_name: config.CLOUDINARY.cloudName ? 'Encontrado, configurado' : 'No encontrado',
+  api_key: config.CLOUDINARY.apiKey ? 'Encontrado, configurado' : 'No encontrado',
+  api_secret: config.CLOUDINARY.apiSecret ? 'Encontrado, configurado' : 'No encontrado'
+});
+
 cloudinary.config({
   cloud_name: config.CLOUDINARY.cloudName,
   api_key: config.CLOUDINARY.apiKey,
@@ -68,10 +74,10 @@ export const upload = multer({
 export const deleteFromCloudinary = async (publicId) => {
   try {
     const result = await cloudinary.uploader.destroy(publicId);
-    console.log('🗑️ Archivo eliminado de Cloudinary:', publicId);
+    console.log('Archivo eliminado de Cloudinary:', publicId);
     return result;
   } catch (error) {
-    console.error('❌ Error eliminando archivo de Cloudinary:', error);
+    console.error('Error eliminando archivo de Cloudinary:', error);
     throw error;
   }
 };

@@ -25,7 +25,7 @@ historiasController.obtenerTodas = async (req, res) => {
       total: historias.length
     });
   } catch (error) {
-    console.error('❌ Error obteniendo historias clínicas:', error);
+    console.error('Error obteniendo historias clínicas:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener historias clínicas',
@@ -57,7 +57,7 @@ historiasController.obtenerPorId = async (req, res) => {
       data: historia
     });
   } catch (error) {
-    console.error('❌ Error obteniendo historia clínica:', error);
+    console.error('Error obteniendo historia clínica:', error);
     res.status(500).json({
       success: false,
       message: 'Error al obtener historia clínica',
@@ -98,7 +98,7 @@ historiasController.crear = async (req, res) => {
       data: historiaPopulada
     });
   } catch (error) {
-    console.error('❌ Error creando historia clínica:', error);
+    console.error('Error creando historia clínica:', error);
     res.status(500).json({
       success: false,
       message: 'Error al crear historia clínica',
@@ -146,7 +146,7 @@ historiasController.actualizar = async (req, res) => {
       data: historiaActualizada
     });
   } catch (error) {
-    console.error('❌ Error actualizando historia clínica:', error);
+    console.error('Error actualizando historia clínica:', error);
     res.status(500).json({
       success: false,
       message: 'Error al actualizar historia clínica',
@@ -188,7 +188,7 @@ historiasController.eliminar = async (req, res) => {
       message: 'Historia clínica eliminada exitosamente'
     });
   } catch (error) {
-    console.error('❌ Error eliminando historia clínica:', error);
+    console.error('Error eliminando historia clínica:', error);
     res.status(500).json({
       success: false,
       message: 'Error al eliminar historia clínica',

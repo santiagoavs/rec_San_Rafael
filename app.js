@@ -68,9 +68,9 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // ==================== MIDDLEWARE DE DEBUGGING ====================
 if (process.env.NODE_ENV === 'development') {
   app.use((req, res, next) => {
-    console.log(`📝 ${req.method} ${req.url}`, {
-      body: Object.keys(req.body || {}).length > 0 ? '✅ Body present' : '❌ No body',
-      query: Object.keys(req.query || {}).length > 0 ? req.query : '❌ No query',
+    console.log(` ${req.method} ${req.url}`, {
+      body: Object.keys(req.body || {}).length > 0 ? 'Body present' : 'No body',
+      query: Object.keys(req.query || {}).length > 0 ? req.query : 'No query',
       headers: {
         'content-type': req.headers['content-type'],
         'authorization': !!req.headers.authorization
@@ -123,7 +123,7 @@ app.use((req, res) => {
 
 // Manejo de errores global
 app.use((err, req, res, next) => {
-  console.error('❌ Error:', err);
+  console.error('Error:', err);
 
   // Error de Multer (archivos)
   if (err.name === 'MulterError') {
